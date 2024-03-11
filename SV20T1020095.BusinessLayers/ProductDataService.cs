@@ -15,7 +15,7 @@ namespace SV20T1020095.BusinessLayers
 
         static ProductDataService()
         {
-            productDB = new ProductDAL(Configuration.ConnectionString);
+            productDB = new ProductDAL(Configuration.ConnectiongString);
         }
         /// <summary>
         /// Tìm kiếm và lấy danh sách mặt hàng (không phân trang)

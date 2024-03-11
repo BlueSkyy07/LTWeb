@@ -13,3 +13,4 @@ D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DataLayer\obj\Debug\net8.0\SV20T102009
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DataLayer\bin\Debug\net8.0\SV20T1020095.DomainModels.dll
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DataLayer\bin\Debug\net8.0\SV20T1020095.DomainModels.pdb
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DataLayer\obj\Debug\net8.0\SV20T1020095.DataLayer.csproj.CopyComplete
+D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DataLayer\obj\Debug\net8.0\SV20T1020095.DataLayer.sourcelink.json

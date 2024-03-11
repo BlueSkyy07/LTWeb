@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace SV20T1020095.DomainModels
 {
-    /// <summary>
-    /// Người giao hàng
-    /// </summary>
     public class Shipper
     {
-        public int ShipperID { get; set; }
+        public int ShipperId { get; set; }
         public string ShipperName { get; set; } = "";
-        public string? Phone { get; set; }
+        public string Phone { get; set; } = "";
     }
 }

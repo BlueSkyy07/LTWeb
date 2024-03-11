@@ -9,3 +9,4 @@ D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T102
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\refint\SV20T1020095.DomainModels.dll
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.pdb
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\ref\SV20T1020095.DomainModels.dll
+D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.sourcelink.json

@@ -8,20 +8,23 @@ using System.Threading.Tasks;
 namespace SV20T1020095.DataLayer.SQLServer
 {
     /// <summary>
-    /// Lớp cha cho các lớp cài đặt phép xử lý dữ liệu trên SQL Sẻver
+    /// Lớp cha cho các lớp cài đặt các phép xử lý dữ liệu trên SQL Server
     /// </summary>
-    public abstract class _BaseDAL
+    public class _BaseDAL
     {
         protected string _connectionString = "";
+
         /// <summary>
-        /// Ctor
+        /// Contractor
         /// </summary>
         /// <param name="connectionString"></param>
-        public _BaseDAL(string connectionString) { 
+        public _BaseDAL(string connectionString)
+        {
             _connectionString = connectionString;
         }
+
         /// <summary>
-        /// Tạo và mở kết nối đến CSDL
+        /// Tạo và mở kết nối đến csdl
         /// </summary>
         /// <returns></returns>
         protected SqlConnection OpenConnection()
@@ -31,6 +34,5 @@ namespace SV20T1020095.DataLayer.SQLServer
             connection.Open();
             return connection;
         }
-
     }
 }

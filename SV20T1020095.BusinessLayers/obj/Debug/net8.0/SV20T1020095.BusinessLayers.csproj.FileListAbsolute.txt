@@ -15,3 +15,4 @@ D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.BusinessLayers\bin\Debug\net8.0\SV20T1
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.BusinessLayers\bin\Debug\net8.0\SV20T1020095.DomainModels.pdb
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.BusinessLayers\obj\Debug\net8.0\SV20T1020095.BusinessLayers.csproj.AssemblyReference.cache
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.BusinessLayers\obj\Debug\net8.0\SV20T1020095.BusinessLayers.csproj.CopyComplete
+D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.BusinessLayers\obj\Debug\net8.0\SV20T1020095.BusinessLayers.sourcelink.json

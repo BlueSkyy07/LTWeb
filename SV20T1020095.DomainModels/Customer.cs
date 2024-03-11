@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SV20T1020095.DomainModels
 {
     /// <summary>
-    /// thông tin khách hàng
+    /// Thông tin về khách hàng
     /// </summary>
     public class Customer
     {
@@ -20,5 +20,4 @@ namespace SV20T1020095.DomainModels
         public string Email { get; set; } = "";
         public bool IsLocked { get; set; }
     }
-
 }

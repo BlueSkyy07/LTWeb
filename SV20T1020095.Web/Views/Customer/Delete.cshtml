@@ -1,8 +1,7 @@
 ﻿@model SV20T1020095.DomainModels.Customer
 @{
-    ViewBag.Title = "Xóa khách hàng";
+    ViewBag.Title = "Xóa Khách hàng";
 }
-
 <div class="box box-danger">
     <div class="box-body">
         <form action="~/Customer/Delete/@Model.CustomerId" method="post">
@@ -15,7 +14,7 @@
                 <p class="form-control-static">@Model.ContactName</p>
             </div>
             <div class="form-group">
-                <label>Điện thoại:</label>
+                <label>Số điện thoại:</label>
                 <p class="form-control-static">@Model.Phone</p>
             </div>
             <div class="form-group">
@@ -27,29 +26,24 @@
                 <p class="form-control-static">@Model.Address</p>
             </div>
             <div class="form-group">
-                <label>Tỉnh/thành:</label>
+                <label>Tỉnh/Thành:</label>
                 <p class="form-control-static">@Model.Province</p>
             </div>
             <div class="form-group">
                 <label>Trạng thái:</label>
-                <p class="form-control-static">@Model.IsLocked</p>
+                <p class="form-control-static">@(@Model.IsLocked ? "Tài khoản bị khóa" : "Tài khoản đang hoạt động")</p>
             </div>
-
             <div class="form-group text-right">
                 @if (ViewBag.AllowDelete)
                 {
                     <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                    Xác nhận xóa
+                        <i class="fa fa-trash-o"></i>
+                        Xác nhận xóa
                     </button>
+
                 }
-                
-                <a href="~/Customer" class="btn btn-default">
-                    Quay lại
-                </a>
+                <a href="~/Customer" class="btn btn-default">Quay lại</a>
             </div>
-
-
         </form>
     </div>
 </div>

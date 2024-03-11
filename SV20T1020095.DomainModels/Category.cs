@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace SV20T1020095.DomainModels
 {
-    /// <summary>
-    /// Loại hàng
-    /// </summary>
     public class Category
     {
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; } = "";
-        public string? Description { get; set; }
+        public string Description { get; set; } = "";
     }
 }

@@ -7,23 +7,25 @@ using System.Threading.Tasks;
 namespace SV20T1020095.BusinessLayers
 {
     /// <summary>
-    /// KHởi tạo, lưu trữ các thông tn cấu hình của BussinessLayer
+    /// Khởi tạo, lưu trữ các thông tin cấu hình của BusinessLayer
     /// </summary>
     public static class Configuration
     {
         /// <summary>
         /// Chuỗi kết thông số kết nối đến CSDL
         /// </summary>
-        public static string ConnectionString { get; private set; } = "";
+        public static string ConnectiongString { get; private set; } = "";
+
         /// <summary>
-        /// Khỏi tạo cấu hình cho BussinessLayer
-        /// (Hmaf này phải được gọi trước khi ứng dụng chạy)
+        /// Khởi tạo cấu hình cho BussinessLayer
+        /// (Hàm này phải được gọi trước khi ứng dụng chạy)
         /// </summary>
-        /// <param name="connectionString"></param>
-        public static void Initialize(string connectionString)
+        /// <param name="connectiongString"></param>
+        public static void Initialize(string connectiongString)
         {
-            Configuration.ConnectionString = connectionString;
+            Configuration.ConnectiongString = connectiongString;
         }
     }
 }
+
 //static class là gì và khác với class thông thường  ch-ỗ nào

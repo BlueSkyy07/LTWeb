@@ -1,10 +1,11 @@
 ﻿using SV20T1020095.DomainModels;
 namespace SV20T1020095.Web.Models
 {
+
     /// <summary>
-    /// lớp cha cho các lớp biểu diễn dữ liệu kết quả tìm kiếm, phân trang
+    /// Lớp cha cho các lớp biểu diễn dữ liệu kết quả tìm kiếm, phân trang
     /// </summary>
-    public abstract class BasePaginationResult
+    public abstract class BasePaginationResutlt
     {
         public int Page { get; set; }
         public int PageSize { get; set; }
@@ -26,12 +27,34 @@ namespace SV20T1020095.Web.Models
                 return c;
             }
         }
-        /// <summary>
-        /// ket qua tim kiem va lay danh sach khach hang
-        /// </summary>
-        public class CustomerSearchResult : BasePaginationResult
-        {
-            public List<Customer> Data { get; set; }
-        }
+
+
+    }
+    /// <summary>
+    /// Kết quả tìm kiếm và lấy danh sách khách hàng
+    /// </summary>
+    public class CustomerSearchResult : BasePaginationResutlt
+    {
+        public List<Customer> Data { get; set; }
+    }
+    public class SupplierSearchResult : BasePaginationResutlt
+    {
+        public List<Supplier> Data { get; set; }
+    }
+    public class ShipperSearchResult : BasePaginationResutlt
+    {
+        public List<Shipper> Data { get; set; }
+    }
+    public class CategorySearchResult : BasePaginationResutlt
+    {
+        public List<Category> Data { get; set; }
+    }
+    public class EmployeeSearchResult : BasePaginationResutlt
+    {
+        public List<Employee> Data { get; set; }
+    }
+    public class ProductSearchResult : BasePaginationResutlt
+    {
+        public List<Product> Data { get; set; }
     }
 }

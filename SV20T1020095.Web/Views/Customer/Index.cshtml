@@ -1,28 +1,31 @@
-﻿@model PaginationSearchInput;
+﻿@model PaginationSearchInput
 @{
-    ViewBag.Title = "Quản lý khách hàng";
+    ViewBag.Title = "Quản lý Khách hàng";
 }
 
-<div class="box-shadow box-primary">
+<div class="box box-primary">
     <div class="box-body">
         <form id="formSearch" action="~/Customer/Search" method="get" data-container="#searchResult">
+            <!-- Form nhập đầu vào tìm kiếm -->
             <div class="input-group">
                 <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
-                <input name="@nameof(Model.SearchValue)" type="text" class="form-control" value="@Model.SearchValue">
+                <input name="@nameof(Model.SearchValue)" type="text" class="form-control"
+                       placeholder="Nhập tên khách hàng cần tìm" value="@Model.SearchValue" autofocus>
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
+                    <button class="btn btn-info" type="submit">
                         <i class="glyphicon glyphicon-search"></i>
                     </button>
-                    <a href="~/Customer/Create" class="btn btn-primary" style="margin-left:5px">
-                        <i class="fa fa-plus"></i>Bổ sung
+
+                    <a href="~/Customer/Create" class="btn btn-primary" style="margin-left: 5px">
+                        <i class="fa fa-plus"></i> Bổ sung
                     </a>
                 </div>
             </div>
         </form>
-        <!--Hiển thị kết quả tìm kiếm-->
+
+        <!-- Hiển thị kết quả tìm kiếm -->
         <div id="searchResult">
         </div>
-
     </div>
 </div>
 
@@ -55,7 +58,6 @@
                     $(container).html(data);
                 }
             });
-
         }
     </script>
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SV20T1020095.DomainModels
 {
     /// <summary>
-    /// Tỉnh thành
+    /// Tỉnh/Thành
     /// </summary>
     public class Province
     {

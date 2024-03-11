@@ -11,32 +11,34 @@ using Microsoft.Data.SqlClient;
 namespace SV20T1020095.BusinessLayers
 {
     /// <summary>
-    /// cung cấp các chức năng xử lý dữ liệu chung
-    /// (tỉnh, khách hàng. nhà cung cấp, loại hàng, người giao hàng,nhân viên)
+    /// Cung cấp các chức năng xử lý dữ liệu chung
+    /// (tỉnh/thành, khách hàng, nhà cung cấp, loại hàng, người giao hàng, nhân viên)
     /// </summary>
-    public static class CommonDataService
+    public class CommonDataService
     {
         private static readonly ICommonDAL<Province> provinceDB;
         private static readonly ICommonDAL<Customer> customerDB;
-        private static readonly ICommonDAL<Employee> employeeDB;
-        private static readonly ICommonDAL<Shipper> shipperDB;
-        private static readonly ICommonDAL<Supplier> supplierDB;
         private static readonly ICommonDAL<Category> categoryDB;
+        private static readonly ICommonDAL<Supplier> supplierDB;
+        private static readonly ICommonDAL<Shipper> shipperDB;
+        private static readonly ICommonDAL<Employee> employeeDB;
 
+        /// <summary>
+        /// Ctor(Câu hỏi: static contructor hoạt động như thế nào?)
+        /// </summary>
         static CommonDataService()
         {
-            string connectionString = Configuration.ConnectionString;
-
+            string connectionString = Configuration.ConnectiongString;
             provinceDB = new ProvinceDAL(connectionString);
             customerDB = new CustomerDAL(connectionString);
-            employeeDB = new EmployeeDAL(connectionString);
-            shipperDB = new ShipperDAL(connectionString);
-            supplierDB = new SupplierDAL(connectionString);
             categoryDB = new CategoryDAL(connectionString);
+            supplierDB = new SupplierDAL(connectionString);
+            shipperDB = new ShipperDAL(connectionString);
+            employeeDB = new EmployeeDAL(connectionString);
         }
 
         /// <summary>
-        /// danh sach cac tinh thanh
+        /// Danh sách các tỉnh thành
         /// </summary>
         /// <returns></returns>
         public static List<Province> ListOfProvinces()
@@ -44,9 +46,149 @@ namespace SV20T1020095.BusinessLayers
             return provinceDB.List().ToList();
         }
 
-        //Supplier
+        public static List<Supplier> ListOfSupplier()
+        {
+            return supplierDB.List().ToList();
+        }
+
+        public static List<Category> ListOfCategory()
+        {
+            return categoryDB.List().ToList();
+        }
         /// <summary>
-        /// tìm kiếm và lấy danh sách nhà cung cấp
+        /// Tìm kiếm và lấy danh sách khách hàng
+        /// </summary>
+        /// <param name="rowCount"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static List<Customer> ListOfCustomers(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
+        {
+            rowCount = customerDB.Count(searchValue);
+            return customerDB.List(page, pageSize, searchValue).ToList();
+        }
+
+        /// <summary>
+        /// Lấy thông tin của một khách hàng theo id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Customer? GetCustomer(int id)
+        {
+            return customerDB.Get(id);
+        }
+
+        /// <summary>
+        /// Thêm 1 khách hàng
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public static int AddCustomer(Customer customer)
+        {
+            return customerDB.Add(customer);
+        }
+
+        /// <summary>
+        /// Cập nhật khách hàng
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public static bool UpdateCustomer(Customer customer)
+        {
+            return customerDB.Update(customer);
+        }
+
+        /// <summary>
+        /// Xóa 1 khách hàng có mã là id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool DeleteCustomer(int id)
+        {
+            if (customerDB.IsUsed(id))
+                return false;
+            return customerDB.Delete(id);
+        }
+
+        /// <summary>
+        /// Kiểm tra xem khách hàng có mã id hiện có dữ liệu liên quan hay không 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool IsUsedCustomer(int id)
+        {
+            return customerDB.IsUsed(id);
+        }
+
+        /// <summary>
+        /// Tìm kiếm và lấy danh sách loại hàng
+        /// </summary>
+        /// <param name="rowCount"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        public static List<Category> ListOfCategories(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
+        {
+            rowCount = categoryDB.Count(searchValue);
+            return categoryDB.List(page, pageSize, searchValue).ToList();
+        }
+
+        /// <summary>
+        /// Lấy thông tin của một loại hàng theo id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Category? GetCategory(int id)
+        {
+            return categoryDB.Get(id);
+        }
+
+        /// <summary>
+        /// Thêm 1 loại hàng
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public static int AddCategory(Category category)
+        {
+            return categoryDB.Add(category);
+        }
+
+        /// <summary>
+        /// Cập nhật loại hàng
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public static bool UpdateCategory(Category category)
+        {
+            return categoryDB.Update(category);
+        }
+
+        /// <summary>
+        /// Xóa 1 loại hàng có mã là id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool DeleteCategory(int id)
+        {
+            if (categoryDB.IsUsed(id))
+                return false;
+            return categoryDB.Delete(id);
+        }
+
+        /// <summary>
+        /// Kiểm tra xem loại hàng có mã id hiện có dữ liệu liên quan hay không 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool IsUsedCategory(int id)
+        {
+            return categoryDB.IsUsed(id);
+        }
+
+        /// <summary>
+        /// Tìm kiếm và lấy danh sách nhà cung cấp
         /// </summary>
         /// <param name="rowCount"></param>
         /// <param name="page"></param>
@@ -58,8 +200,9 @@ namespace SV20T1020095.BusinessLayers
             rowCount = supplierDB.Count(searchValue);
             return supplierDB.List(page, pageSize, searchValue).ToList();
         }
+
         /// <summary>
-        /// lấy thông tin 1 nhà cung cấp theo mã
+        /// Lấy thông tin của một nhà cung cấp theo id 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -67,17 +210,19 @@ namespace SV20T1020095.BusinessLayers
         {
             return supplierDB.Get(id);
         }
+
         /// <summary>
-        /// thêm mới 1 nhà cung cấp
+        /// Thêm 1 nhà cung cấp
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="supplier"></param>
         /// <returns></returns>
-        public static int AddSupplier(Supplier data)
+        public static int AddSupplier(Supplier supplier)
         {
-            return supplierDB.Add(data);
+            return supplierDB.Add(supplier);
         }
+
         /// <summary>
-        /// cập nhập nhà cung cấp
+        /// Cập nhật nhà cung cấp
         /// </summary>
         /// <param name="supplier"></param>
         /// <returns></returns>
@@ -85,21 +230,21 @@ namespace SV20T1020095.BusinessLayers
         {
             return supplierDB.Update(supplier);
         }
+
         /// <summary>
-        /// xoá nhà cung cấp có mã là id
+        /// Xóa 1 nhà cung cấp có mã là id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public static bool DeleteSupplier(int id)
         {
             if (supplierDB.IsUsed(id))
-            {
                 return false;
-            }
             return supplierDB.Delete(id);
         }
+
         /// <summary>
-        /// kiểm tra nhà cung cấp có mã id có dữ liệu liên quan hay không
+        /// Kiểm tra xem nhà cung cấp có mã id hiện có dữ liệu liên quan hay không 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -108,75 +253,8 @@ namespace SV20T1020095.BusinessLayers
             return supplierDB.IsUsed(id);
         }
 
-        //Customer
         /// <summary>
-        /// 
-        /// tìm kiếm và lấy danh sách khách hàng
-        /// </summary>
-        /// <param name="rowCount"></param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        /// 
-        public static List<Customer> ListOfCustomers(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
-        {
-            rowCount = customerDB.Count(searchValue);
-            return customerDB.List(page, pageSize, searchValue).ToList();
-        }
-        /// <summary>
-        /// lấy thông tin 1 khách hàng theo mã khách hàng
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static Customer? GetCustomer(int id)
-        {
-            return customerDB.Get(id);
-        }
-        /// <summary>
-        /// thêm mới 1 khách hàng
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static int AddCustomer(Customer data)
-        {
-            return customerDB.Add(data);
-        }
-        /// <summary>
-        /// cập nhập khách hàng
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <returns></returns>
-        public static bool UpdateCustomer(Customer customer)
-        {
-            return customerDB.Update(customer);
-        }
-        /// <summary>
-        /// xoá khách hàng có mã là id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool DeleteCustomer(int id)
-        {
-            if (customerDB.IsUsed(id))
-            {
-                return false;
-            }
-            return customerDB.Delete(id);
-        }
-        /// <summary>
-        /// kiểm tra khách hàng có mã id có dữ liệu liên quan hay không
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool IsUsedCustomer(int id)
-        {
-            return customerDB.IsUsed(id);
-        }
-
-        //Shipper
-        /// <summary>
-        /// Tìm kiếm và lấy danh sách người giao hàng
+        /// Tìm kiếm và lấy danh sách shipper
         /// </summary>
         /// <param name="rowCount"></param>
         /// <param name="page"></param>
@@ -186,11 +264,11 @@ namespace SV20T1020095.BusinessLayers
         public static List<Shipper> ListOfShippers(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = shipperDB.Count(searchValue);
-
             return shipperDB.List(page, pageSize, searchValue).ToList();
         }
+
         /// <summary>
-        /// lấy thông tin 1 shipper theo mã
+        /// Lấy thông tin của một shipper theo id 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -198,35 +276,41 @@ namespace SV20T1020095.BusinessLayers
         {
             return shipperDB.Get(id);
         }
+
         /// <summary>
-        /// thêm mới 1 shipper
+        /// Thêm 1 shipper
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="shipper"></param>
         /// <returns></returns>
-        public static int AddShipper(Shipper data)
+        public static int AddShipper(Shipper shipper)
         {
-            return shipperDB.Add(data);
+            return shipperDB.Add(shipper);
         }
+
         /// <summary>
-        /// cập nhập thônng tin shipper
+        /// Cập nhật shipper
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="shipper"></param>
         /// <returns></returns>
-        public static bool UpdateShipper(Shipper data)
+        public static bool UpdateShipper(Shipper shipper)
         {
-            return shipperDB.Update(data);
+            return shipperDB.Update(shipper);
         }
+
         /// <summary>
-        /// xoá shipper theo id
+        /// Xóa 1 shipper có mã là id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public static bool DeleteShipper(int id)
         {
+            if (shipperDB.IsUsed(id))
+                return false;
             return shipperDB.Delete(id);
         }
+
         /// <summary>
-        /// kiểm tra shipper có mã id hiện có dữ liệu liên quan hay không
+        /// Kiểm tra xem shipper có mã id hiện có dữ liệu liên quan hay không 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -235,23 +319,14 @@ namespace SV20T1020095.BusinessLayers
             return shipperDB.IsUsed(id);
         }
 
-        //Employee
-        /// <summary>
-        /// Tìm kiếm và lấy danh sách nhân viên
-        /// </summary>
-        /// <param name="rowCount"></param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
         public static List<Employee> ListOfEmployees(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
         {
             rowCount = employeeDB.Count(searchValue);
-
             return employeeDB.List(page, pageSize, searchValue).ToList();
         }
+
         /// <summary>
-        /// lấy thông tin nhân viên theo id
+        /// Lấy thông tin của một nhân viên theo id 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -259,112 +334,47 @@ namespace SV20T1020095.BusinessLayers
         {
             return employeeDB.Get(id);
         }
+
         /// <summary>
-        /// thêm mới nhân viên
+        /// Thêm 1 nhân viên
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="employee"></param>
         /// <returns></returns>
-        public static int AddEmployee(Employee data)
+        public static int AddEmployee(Employee employee)
         {
-            return employeeDB.Add(data);
+            return employeeDB.Add(employee);
         }
+
         /// <summary>
-        /// cập nhập thông tin nhân viên
+        /// Cập nhật mhân viên
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="employee></param>
         /// <returns></returns>
-        public static bool UpdateEmployee(Employee data)
+        public static bool UpdateEmployee(Employee employee)
         {
-            return employeeDB.Update(data);
+            return employeeDB.Update(employee);
         }
+
         /// <summary>
-        /// cập nhập thông tin nhân viên
+        /// Xóa 1 nhân viên có mã là id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public static bool DeleteEmployee(int id)
         {
+            if (employeeDB.IsUsed(id))
+                return false;
             return employeeDB.Delete(id);
         }
+
         /// <summary>
-        /// kiểm tra xem nhân viên có mã id hiện có dữ liệu liên quan hay không
+        /// Kiểm tra xem nhân viên có mã id hiện có dữ liệu liên quan hay không 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public static bool IsUsedEmployee(int id)
         {
             return employeeDB.IsUsed(id);
-        }
-
-        //Category
-
-        /// <summary>
-        /// Tìm kiếm và lấy danh sách loại hàng
-        /// </summary>
-        /// <param name="rowCount"></param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
-        /// 
-        public static List<Category> ListOfCategories(out int rowCount, int page = 1, int pageSize = 0, string searchValue = "")
-        {
-            rowCount = categoryDB.Count(searchValue);
-
-            return categoryDB.List(page, pageSize, searchValue).ToList();
-        }
-        public static List<Category> ListOfCatgoryList()
-        {
-            return categoryDB.List().ToList();
-        }
-        public static List<Supplier> ListOfSupplierList()
-        {
-            return supplierDB.List().ToList();
-        }
-        /// <summary>
-        /// Lấy thông tin loại hàng theo mã
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static Category? GetCategory(int id)
-        {
-            return categoryDB.Get(id);
-        }
-        /// <summary>
-        /// Thêm mới loại hàng
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static int AddCategory(Category data)
-        {
-            return categoryDB.Add(data);
-        }
-        /// <summary>
-        /// cập nhập thông tin loại hàng
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public static bool UpdateCategory(Category data)
-        {
-            return categoryDB.Update(data);
-        }
-        /// <summary>
-        /// xoá loại hàng theo id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool DeleteCategory(int id)
-        {
-            return categoryDB.Delete(id);
-        }
-        /// <summary>
-        /// kiểm tra xem loại hàng có mã id hiện có dữ liệu liên quan hay không 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static bool IsUsedCategory(int id)
-        {
-            return categoryDB.IsUsed(id);
         }
     }
 }

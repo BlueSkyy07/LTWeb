@@ -20,6 +20,7 @@ namespace SV20T1020095.DataLayer.SQLServer
     {
         public CustomerDAL(string connectionString) : base(connectionString)
         {
+
         }
 
         public int Add(Customer data)
@@ -28,25 +29,24 @@ namespace SV20T1020095.DataLayer.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"if exists(select * from Customers where Email = @Email)
-                                select -1
-                            else
-                                begin
-                                    insert into Customers(CustomerName,ContactName,Province,Address,Phone,Email,IsLocked)
-                                    values(@CustomerName,@ContactName,@Province,@Address,@Phone,@Email,@IsLocked);
-                                    select @@identity;
-                                end";
+                                    select -1
+                                else
+                                    begin
+                                        insert into Customers(CustomerName,ContactName,Province,Address,Phone,Email,IsLocked)
+                                        values(@CustomerName,@ContactName,@Province,@Address,@Phone,@Email,@IsLocked);
+                                        select @@identity;
+                                    end";
                 var parameters = new
                 {
-                    customerName = data.CustomerName ?? "",
-                    contactName = data.ContactName ?? "",
+                    CustomerName = data.CustomerName ?? "",
+                    ContactName = data.ContactName ?? "",
                     Province = data.Province ?? "",
                     Address = data.Address ?? "",
                     Phone = data.Phone ?? "",
                     Email = data.Email ?? "",
-                    IsLocked = data.IsLocked
+                    IsLocked = data.IsLocked,
                 };
-                // thực thi câu lệnh
-                id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: CommandType.Text);
+                id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
                 connection.Close();
             }
             return id;
@@ -55,26 +55,21 @@ namespace SV20T1020095.DataLayer.SQLServer
         public int Count(string searchValue = "")
         {
             int count = 0;
-
-            if (!searchValue.IsNullOrEmpty())
-                searchValue = "%" + searchValue + "%";
-
-            using (SqlConnection connection = OpenConnection())
+            if (!string.IsNullOrEmpty(searchValue))
             {
-                var sql = @"
-                    select count(*) from Customers
-                    where (@searchvalue = N'') or (CustomerName like @searchvalue)";
-
-                var para = new
+                searchValue = "%" + searchValue + "%";
+            }
+            using (var connection = OpenConnection())
+            {
+                var sql = @"select count(*) from Customers 
+                                  where (@searchValue = N'') or (CustomerName like @searchValue)";
+                var parameters = new
                 {
                     searchValue = searchValue ?? "",
                 };
-
-                count = connection.ExecuteScalar<int>(sql: sql, param: para, commandType: CommandType.Text);
-
+                count = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
                 connection.Close();
             }
-
             return count;
         }
 
@@ -83,9 +78,12 @@ namespace SV20T1020095.DataLayer.SQLServer
             bool result = false;
             using (var connection = OpenConnection())
             {
-                var sql = "delete from Customers where CustomerId = @customerId and not exists(select * from Orders where CustomerId = @customerId)";
-                var parameters = new { customerId = id };
-                result = connection.Execute(sql: sql, param: parameters, commandType: CommandType.Text) > 0;
+                var sql = @"delete from Customers where CustomerId = @customerId";
+                var parameters = new
+                {
+                    CustomerId = id,
+                };
+                result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
                 connection.Close();
             }
             return result;
@@ -96,9 +94,12 @@ namespace SV20T1020095.DataLayer.SQLServer
             Customer? data = null;
             using (var connection = OpenConnection())
             {
-                var sql = "select * from Customers where CustomerId = @customerId";
-                var parameters = new { customerId = id };
-                data = connection.QueryFirstOrDefault<Customer>(sql: sql, param: parameters, commandType: CommandType.Text);
+                var sql = @"select * from Customers where CustomerId = @customerId";
+                var parameters = new
+                {
+                    CustomerId = id
+                };
+                data = connection.QueryFirstOrDefault<Customer>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
                 connection.Close();
             }
             return data;
@@ -110,11 +111,14 @@ namespace SV20T1020095.DataLayer.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"if exists(select * from Orders where CustomerId = @customerId)
-                                select 1
-                            else 
-                                select 0";
-                var parameters = new { customerId = id };
-                result = connection.ExecuteScalar<bool>(sql: sql, param: parameters, commandType: CommandType.Text);
+                                    select 1
+                                else 
+                                    select 0";
+                var parameters = new
+                {
+                    CustomerId = id
+                };
+                result = connection.ExecuteScalar<bool>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
                 connection.Close();
             }
             return result;
@@ -123,6 +127,7 @@ namespace SV20T1020095.DataLayer.SQLServer
         public IList<Customer> List(int page = 1, int pageSize = 0, string searchValue = "")
         {
             List<Customer> data = new List<Customer>();
+
             if (!string.IsNullOrEmpty(searchValue))
             {
                 searchValue = "%" + searchValue + "%";
@@ -130,24 +135,25 @@ namespace SV20T1020095.DataLayer.SQLServer
             using (var connection = OpenConnection())
             {
                 var sql = @"with cte as
-                            (
-	                            select	*, row_number() over (order by CustomerName) as RowNumber
-	                            from	Customers 
-	                            where	(@searchValue = N'') or (CustomerName like @searchValue)
-                            )
-                            select * from cte
-                            where  (@pageSize = 0) 
-	                            or (RowNumber between (@page - 1) * @pageSize + 1 and @page * @pageSize)
-                            order by RowNumber";
+                                (
+	                                select	*, row_number() over (order by CustomerName) as RowNumber
+	                                from	Customers 
+	                                where	(@searchValue = N'') or (CustomerName like @searchValue)
+                                )
+                                select * from cte
+                                where  (@pageSize = 0) 
+	                                or (RowNumber between (@page - 1) * @pageSize + 1 and @page * @pageSize)
+                                order by RowNumber";
                 var parameters = new
                 {
                     page = page,
                     pageSize = pageSize,
-                    searchValue = searchValue ?? ""
+                    searchValue = searchValue ?? "",
                 };
                 data = connection.Query<Customer>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text).ToList();
                 connection.Close();
             }
+
             return data;
         }
 
@@ -156,35 +162,37 @@ namespace SV20T1020095.DataLayer.SQLServer
             bool result = false;
             using (var connection = OpenConnection())
             {
-                var sql = @"if not exists(select * from Customers where CustomerId <> @customerId and Email = @email)
-                                begin
-                                    update Customers 
-                                    set CustomerName = @customerName,
-                                        ContactName = @contactName,
-                                        Province = @province,
-                                        Address = @address,
-                                        Phone = @phone,
-                                        Email = @email,
-                                        IsLocked = @isLocked
-                                    where CustomerId = @customerId
-                                end";
+                var sql = @"if not exists(select * from Customers where CustomerId <> @CustomerId and Email = @Email)
+                                    begin
+                                        update Customers 
+                                        set CustomerName = @customerName,
+                                            ContactName = @contactName,
+                                            Province = @province,
+                                            Address = @address,
+                                            Phone = @phone,
+                                            Email = @email,
+                                            IsLocked = @isLocked
+                                        where CustomerId = @customerId
+                                    end";
                 var parameters = new
                 {
-                    customerId = data.CustomerId,
-                    customerName = data.CustomerName ?? "",
-                    contactName = data.ContactName ?? "",
+                    CustomerId = data.CustomerId,
+                    CustomerName = data.CustomerName ?? "",
+                    ContactName = data.ContactName ?? "",
                     Province = data.Province ?? "",
                     Address = data.Address ?? "",
                     Phone = data.Phone ?? "",
                     Email = data.Email ?? "",
-                    IsLocked = data.IsLocked
+                    IsLocked = data.IsLocked,
                 };
-                result = connection.Execute(sql: sql, param: parameters, commandType: CommandType.Text) > 0;
-            }
+                result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
+                connection.Close();
+            };
             return result;
         }
     }
 }
+
 
 //ctrl + M + O
 //ctrl + M + L

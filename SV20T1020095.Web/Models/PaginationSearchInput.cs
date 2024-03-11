@@ -9,12 +9,14 @@
         public int PageSize { get; set; } = 0;
         public string SearchValue { get; set; } = "";
     }
+
     /// <summary>
     /// Đầu vào sử dụng cho tìm kiếm mặt hàng
     /// </summary>
-    public class ProductSrearchInput : PaginationSearchInput
+    public class ProductSearchInput : PaginationSearchInput
     {
-        public int CategoryID { get; set; } = 0;
-        public int SupplierID { get; set; } = 0;
+        public int CategoryId { get; set; } = 0;
+        public int SupplierId { get; set; } = 0;
     }
+
 }
