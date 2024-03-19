@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using SV20T1020095.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,14 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews().AddMvcOptions(
     option => option.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true
     );
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.Cookie.Name = "AuthenticationCookie";
+                    option.LoginPath = "/Account/Login";
+                    option.AccessDeniedPath = "/Account/AccessDenined";
+                    option.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+                });
 builder.Services.AddSession(option =>
 {
     option.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -21,11 +30,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseSession();
 
 app.MapControllerRoute(

@@ -4,8 +4,10 @@ using System.Buffers;
 using System.Drawing.Printing;
 using SV20T1020095.DomainModels;
 using SV20T1020095.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 namespace SV20T1020095.Web.Controllers
 {
+    [Authorize(Roles = $"{WebUserRoles.Administrator},{WebUserRoles.Employee}")]
     public class CategoryController : Controller
     {
         private const int PAGE_SIZE = 20;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SV20T1020095.BusinessLayers;
 using SV20T1020095.DomainModels;
 using SV20T1020095.Web.Models;
@@ -8,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace SV20T1020095.Web.Controllers
 {
+    [Authorize(Roles = $"{WebUserRoles.Administrator},{WebUserRoles.Employee}")]
     public class ProductController : Controller
     {
         private const int PAGE_SIZE = 25;

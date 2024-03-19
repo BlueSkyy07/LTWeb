@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SV20T1020095.BusinessLayers;
 using SV20T1020095.DomainModels;
@@ -7,6 +8,7 @@ using System.CodeDom;
 using System.Net.WebSockets;
 namespace SV20T1020095.Web.Controllers
 {
+    [Authorize(Roles = $"{WebUserRoles.Administrator},{WebUserRoles.Employee}")]
     public class CustomerController : Controller
     {
         private const int PAGE_SIZE = 20;
