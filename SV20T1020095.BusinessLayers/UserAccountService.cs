@@ -27,5 +27,11 @@ namespace SV20T1020095.BusinessLayers
             return employeeAccountDB.ChangePassword(userName, oldPassword, newPassword);
 
         }
+        public static bool CheckPassword(string userName, string oldPassword)
+        {
+
+            return employeeAccountDB.CheckPassword(userName, oldPassword);
+
+        }
     }
 }

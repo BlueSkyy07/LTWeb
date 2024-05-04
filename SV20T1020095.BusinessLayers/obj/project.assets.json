@@ -2156,19 +2156,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BLUESKY\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\SV20T1020095.BusinessLayers.csproj",
+      "projectUniqueName": "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\SV20T1020095.BusinessLayers.csproj",
       "projectName": "SV20T1020095.BusinessLayers",
-      "projectPath": "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\SV20T1020095.BusinessLayers.csproj",
-      "packagesPath": "C:\\Users\\BLUESKY\\.nuget\\packages\\",
-      "outputPath": "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\obj\\",
+      "projectPath": "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\SV20T1020095.BusinessLayers.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.BusinessLayers\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\BLUESKY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2182,11 +2182,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DataLayer\\SV20T1020095.DataLayer.csproj": {
-              "projectPath": "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DataLayer\\SV20T1020095.DataLayer.csproj"
+            "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DataLayer\\SV20T1020095.DataLayer.csproj": {
+              "projectPath": "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DataLayer\\SV20T1020095.DataLayer.csproj"
             },
-            "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DomainModels\\SV20T1020095.DomainModels.csproj": {
-              "projectPath": "D:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DomainModels\\SV20T1020095.DomainModels.csproj"
+            "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DomainModels\\SV20T1020095.DomainModels.csproj": {
+              "projectPath": "F:\\HocTap\\LTWeb\\SV20T1020095\\SV20T1020095.DomainModels\\SV20T1020095.DomainModels.csproj"
             }
           }
         }
@@ -2195,6 +2195,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2216,7 +2221,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

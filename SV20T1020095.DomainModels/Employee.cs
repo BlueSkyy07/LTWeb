@@ -15,6 +15,9 @@ namespace SV20T1020095.DomainModels
         public string Phone { get; set; } = "";
         public string Email { get; set; } = "";
         public string Photo { get; set; } = "";
+        public string RoleNames { get; set; } = "";
+        public string Password { get; set; } = "";
+
         public bool IsWorking { get; set; } = true;
     }
 }

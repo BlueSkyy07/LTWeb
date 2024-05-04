@@ -56,5 +56,51 @@ namespace SV20T1020095.Web.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
+        public IActionResult AccessDenined()
+        {
+            return View();
+        }
+        public IActionResult ChangePassword(string userName, string oldPassword, string newPassword, string confirmPassword)
+        {
+            if (HttpContext.Request.Method == "POST")
+            {
+                if (!UserAccountService.CheckPassword(userName, oldPassword))
+                {
+                    ModelState.AddModelError("OldPassword", "Mật khẩu cũ không chính xác.");
+                    return View();
+                }
+                if (string.IsNullOrEmpty(newPassword))
+                {
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("NewPassword", "Vui lòng nhập mật khẩu mới.");
+                    return View();
+                }
+                if (string.IsNullOrEmpty(confirmPassword))
+                {
+                    ViewBag.NewPassword = newPassword;
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("ConfirmPassword", "Vui lòng nhập lại mật khẩu mới.");
+                    return View();
+                }
+                if (UserAccountService.CheckPassword(userName, newPassword))
+                {
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("NewPassword", "Mật khẩu mới không được trùng với mật khẩu cũ");
+                    return View();
+                }
+                if (newPassword != confirmPassword)
+                {
+                    ViewBag.NewPassword = newPassword;
+                    ViewBag.OldPassword = oldPassword;
+                    ModelState.AddModelError("ConfirmPassword", "Mật khẩu không phù hợp. Vui lòng nhập lại!");
+                    return View();
+                }
+                UserAccountService.ChangePassword(userName, oldPassword, newPassword);
+                ViewBag.ChangePasswordSuccess = true;
+                return View();
+            }
+
+            return View();
+        }
     }
 }

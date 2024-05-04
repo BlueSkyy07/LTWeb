@@ -89,7 +89,8 @@ namespace SV20T1020095.Web.Controllers
                     ModelState.AddModelError(nameof(data.Phone), "Số điện thoại không được để trống");
                 if (string.IsNullOrWhiteSpace(data.Email))
                     ModelState.AddModelError(nameof(data.Email), "Email không được để trống");
-
+                if (string.IsNullOrWhiteSpace(data.RoleNames))
+                    ModelState.AddModelError(nameof(data.RoleNames), "Quyền không được để trống");
                 //Thông qua thuộc tính IsValid của ModelState  để kiểm tra xem có tồn tại lỗi hay không
                 if (!ModelState.IsValid)
                 {

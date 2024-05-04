@@ -45,7 +45,6 @@ namespace SV20T1020095.BusinessLayers
         {
             return provinceDB.List().ToList();
         }
-
         public static List<Supplier> ListOfSupplier()
         {
             return supplierDB.List().ToList();
@@ -54,6 +53,14 @@ namespace SV20T1020095.BusinessLayers
         public static List<Category> ListOfCategory()
         {
             return categoryDB.List().ToList();
+        }
+        public static List<Customer> ListOfCustomer()
+        {
+            return customerDB.List().ToList();
+        }
+        public static List<Shipper> ListOfShipper()
+        {
+            return shipperDB.List().ToList();
         }
         /// <summary>
         /// Tìm kiếm và lấy danh sách khách hàng

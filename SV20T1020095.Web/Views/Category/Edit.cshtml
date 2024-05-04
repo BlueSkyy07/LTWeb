@@ -5,7 +5,7 @@
 
 <div class="box box-primary">
     <div class="box-body">
-        <form action="~/Category/Save" method="post">
+        <form action="~/Category/Save" method="post" enctype="multipart/form-data">
             <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
             <div class="form-group">
                 <div class="form-group">
@@ -19,6 +19,19 @@
                 </div>
                 <div class="form-group">
                     @Html.ValidationMessage("Error", new { @style = "color: #f00" })
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Ảnh loại hàng:</label>
+                    <div class="col-sm-10">
+                        <input type="hidden" name="Photo" value="@Model.Photo" />
+                        <input type="file" class="form-control" name="uploadPhoto" accept="image/*"
+                               onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-sm-10">
+                        <img id="Photo" src="~/images/category/@Model.Photo" class="img img-bordered" style="width:200px" />
+                    </div>
                 </div>
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary">

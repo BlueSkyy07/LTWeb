@@ -10,3 +10,15 @@ D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\refint\S
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.pdb
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\ref\SV20T1020095.DomainModels.dll
 D:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.sourcelink.json
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\bin\Debug\net8.0\SV20T1020095.DomainModels.deps.json
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\bin\Debug\net8.0\SV20T1020095.DomainModels.dll
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\bin\Debug\net8.0\SV20T1020095.DomainModels.pdb
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.GeneratedMSBuildEditorConfig.editorconfig
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.AssemblyInfoInputs.cache
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.AssemblyInfo.cs
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.csproj.CoreCompileInputs.cache
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.sourcelink.json
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.dll
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\refint\SV20T1020095.DomainModels.dll
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\SV20T1020095.DomainModels.pdb
+F:\HocTap\LTWeb\SV20T1020095\SV20T1020095.DomainModels\obj\Debug\net8.0\ref\SV20T1020095.DomainModels.dll

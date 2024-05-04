@@ -6,7 +6,7 @@ using SV20T1020095.Web.Models;
 
 namespace SV20T1020095.Web.Controllers
 {
-    [Authorize(Roles = $"{WebUserRoles.Administrator},{WebUserRoles.Employee}")]
+    [Authorize(Roles = $"{WebUserRoles.Administrator}")]
     public class SupplierController : Controller
     {
         private const int PAGE_SIZE = 20;

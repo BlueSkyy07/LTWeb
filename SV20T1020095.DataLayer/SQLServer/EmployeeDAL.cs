@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,8 +27,8 @@ namespace SV20T1020095.DataLayer.SQLServer
                                     select -1
                                 else
                                     begin
-                                        insert into Employees(FullName,BirthDate,Address,Phone,Email,Photo,IsWorking)
-                                        values(@FullName,@BirthDate,@Address,@Phone,@Email,@Photo,@IsWorking);
+                                        insert into Employees(FullName,BirthDate,Address,Phone,Email,Password, Photo,IsWorking, RoleNames)
+                                        values(@FullName,@BirthDate,@Address,@Phone,@Email,1, @Photo,@IsWorking, @Rolenames);
                                         select @@identity;
                                     end";
                 var parameters = new
@@ -38,7 +39,8 @@ namespace SV20T1020095.DataLayer.SQLServer
                     Phone = data.Phone ?? "",
                     Email = data.Email ?? "",
                     Photo = data.Photo ?? "",
-                    IsWorking = data.IsWorking
+                    IsWorking = data.IsWorking,
+                    RoleNames = data.RoleNames
                 };
                 id = connection.ExecuteScalar<int>(sql: sql, param: parameters, commandType: System.Data.CommandType.Text);
                 connection.Close();
@@ -164,6 +166,7 @@ namespace SV20T1020095.DataLayer.SQLServer
                                             Address = @address,
                                             Phone = @phone,
                                             Email = @email,
+                                            RoleNames = @rolenames,
                                             Photo = @photo,
                                             IsWorking = @isworking
                                         where EmployeeId = @EmployeeId
@@ -177,6 +180,7 @@ namespace SV20T1020095.DataLayer.SQLServer
                     Phone = data.Phone ?? "",
                     Email = data.Email ?? "",
                     Photo = data.Photo ?? "",
+                    RoleNames = data.RoleNames ?? "",
                     IsWorking = data.IsWorking,
                 };
                 result = connection.Execute(sql: sql, param: parameters, commandType: System.Data.CommandType.Text) > 0;
